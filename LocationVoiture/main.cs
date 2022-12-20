@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 // jihed krouna 2077603
+// source icone : https://www.flaticon.com/free-icon/project-management_1087927?term=manager&page=1&position=7&page=1&position=7&related_id=1087927&origin=tag
+// auteur : dDara
 
 namespace LocationVoiture
 {
@@ -28,6 +30,7 @@ namespace LocationVoiture
         CalculAge calculAge = new CalculAge(Client.ValiderAge);
         int i;
         AdoNet Ado = new AdoNet();
+        AdoNet AdoVehicule = new AdoNet();
         public string MessageErreur;
         public const string ModeleNom = "^[a-zA-Z]+$";
         public const string ModelePrenom = "^[a-zA-Z]+$";
@@ -115,9 +118,16 @@ namespace LocationVoiture
             Ado.DtLocation = Ado.Dslocation.Tables[0];
             this.dataGridViewClient.DataSource = Ado.DtLocation;
 
+            string Query1 = "select * from Vehicule;";
+            AdoVehicule.Cmd.CommandText = Query1;
 
-            Ado.DtVehicule = Ado.Dslocation.Tables[1];
-            this.dataGridViewVehicule.DataSource = Ado.DtVehicule;
+            AdoVehicule.Cmd.Connection = AdoVehicule.Conn;
+            AdoVehicule.Adapter.SelectCommand = AdoVehicule.Cmd;
+            AdoVehicule.Adapter.Fill(AdoVehicule.Dslocation);
+
+
+            AdoVehicule.DtVehicule = AdoVehicule.Dslocation.Tables[0];
+            this.dataGridViewVehicule.DataSource = AdoVehicule.DtVehicule;
 
             // selectionner les premiers elements des combobox de la partie voiture
             comboMarque.SelectedItem = comboMarque.Items[0];
@@ -197,9 +207,9 @@ namespace LocationVoiture
         }
         private int TrouverIndexRowVehicule(string p_idVehicule)
         {
-            for (int i = 0; i < Ado.DtVehicule.Rows.Count; i++)
+            for (int i = 0; i < AdoVehicule.DtVehicule.Rows.Count; i++)
             {
-                if (p_idVehicule == Ado.DtVehicule.Rows[i][0].ToString())
+                if (p_idVehicule == AdoVehicule.DtVehicule.Rows[i][0].ToString())
                 {
                     return i;
                 }
@@ -217,21 +227,25 @@ namespace LocationVoiture
             {
                 MessageErreur += "\nUn autre véhicule existe avec le même numéro de permis";
             }
-            
+            if(txtIDvehicule.Text.Length != 5)
+            {
+
+                MessageErreur += "\nLe ID du véhicule devrait être 5 charactère";
+            } 
 
             if (MessageErreur == "")
             {
                 // ajout dans dataview
                 // inspiré du laboratoire ADO.NET : Mode déconnecté ou indirect
-                DataRow unVehicule = Ado.DtVehicule.NewRow();
+                DataRow unVehicule = AdoVehicule.DtVehicule.NewRow();
                 unVehicule[0] = txtIDvehicule.Text.Trim();
                 unVehicule[1] = comboMarque.Text.Trim();
                 unVehicule[2] = comboModele.Text.Trim();
-                unVehicule[3] = comboAnnee.SelectedValue;
+                unVehicule[3] = comboAnnee.Text.Trim();
                 unVehicule[4] = comboCouleur.Text.Trim();
                 unVehicule[5] = int.Parse(txtKilometrage.Text.Trim()); ;
                 unVehicule[6] = comboCategorie.Text.Trim();
-                Ado.DtVehicule.Rows.Add(unVehicule);
+                AdoVehicule.DtVehicule.Rows.Add(unVehicule);
 
             }
             if (MessageErreur != "")
@@ -369,15 +383,38 @@ namespace LocationVoiture
                     MessageBox.Show(Message, BarreTitre, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtNoPermis.Focus();
                 }
-            
-        
         }
 
 
         private void BtnSauvegarderVehicule_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                SqlCommandBuilder builder = new SqlCommandBuilder(AdoVehicule.Adapter);
+                AdoVehicule.Adapter.Update(AdoVehicule.Dslocation, Ado.DtLocation.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
+
+        private void Btn_modiferVehicule_click(object sender, EventArgs e)
+        {
+            DataRow unVehicule = AdoVehicule.DtVehicule.NewRow();
+            unVehicule[0] = txtIDvehicule.Text.Trim();
+            unVehicule[1] = comboMarque.Text.Trim();
+            unVehicule[2] = comboModele.Text.Trim();
+            unVehicule[3] = comboAnnee.Text.Trim();
+            unVehicule[4] = comboCouleur.Text.Trim();
+            unVehicule[5] = int.Parse(txtKilometrage.Text.Trim()); ;
+            unVehicule[6] = comboCategorie.Text.Trim();
+            AdoVehicule.DtVehicule.Rows.Add(unVehicule);
+        }
+
+
+        
     }
 }
 
