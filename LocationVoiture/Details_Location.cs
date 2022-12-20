@@ -23,11 +23,12 @@ namespace LocationVehicule
             this.Assurance = false;
 
         }
-        public Details_Location(int pNbrJoursLocation, int pNbrKmParcourus, bool pAssurance)
+        public Details_Location(int pNbrKmParcourus)
         {
-            this.NbrJoursLocation = pNbrJoursLocation;
+            // pour usage future
+            //this.NbrJoursLocation = pNbrJoursLocation;
             this.NbrKmParcourus = pNbrKmParcourus;
-            this.Assurance = pAssurance;
+            //this.Assurance = pAssurance;
 
         }
         public override string ToString()
