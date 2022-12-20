@@ -63,7 +63,6 @@
             this.dataGridViewVehicule = new System.Windows.Forms.DataGridView();
             this.comboMarque = new System.Windows.Forms.ComboBox();
             this.comboModele = new System.Windows.Forms.ComboBox();
-            this.comboAnnee = new System.Windows.Forms.ComboBox();
             this.comboCouleur = new System.Windows.Forms.ComboBox();
             this.comboCategorie = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -86,6 +85,7 @@
             this.vehiculeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.vehiculeTableAdapter = new LocationVoiture.LocationVoitureDataSetTableAdapters.VehiculeTableAdapter();
             this.vehiculeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.comboAnnee = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).BeginInit();
@@ -404,6 +404,7 @@
             this.txtIDvehicule.Name = "txtIDvehicule";
             this.txtIDvehicule.Size = new System.Drawing.Size(179, 20);
             this.txtIDvehicule.TabIndex = 48;
+            this.txtIDvehicule.Text = "123123";
             // 
             // textBox1
             // 
@@ -411,7 +412,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(114, 20);
             this.textBox1.TabIndex = 47;
-            this.textBox1.Text = "AAAA1231236";
+            this.textBox1.Text = "123123";
             // 
             // btnRechercherVehicule
             // 
@@ -432,6 +433,7 @@
             this.btnSauvegarderVehicule.TabIndex = 45;
             this.btnSauvegarderVehicule.Text = "Sauvegarder";
             this.btnSauvegarderVehicule.UseVisualStyleBackColor = true;
+            this.btnSauvegarderVehicule.Click += new System.EventHandler(this.BtnSauvegarderVehicule_Click);
             // 
             // dataGridViewVehicule
             // 
@@ -448,6 +450,13 @@
             // 
             this.comboMarque.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboMarque.FormattingEnabled = true;
+            this.comboMarque.Items.AddRange(new object[] {
+            "Marque A",
+            "Marque B",
+            "Marque C",
+            "Marque D",
+            "Marque E",
+            "Marque F"});
             this.comboMarque.Location = new System.Drawing.Point(137, 45);
             this.comboMarque.Name = "comboMarque";
             this.comboMarque.Size = new System.Drawing.Size(179, 21);
@@ -468,22 +477,6 @@
             this.comboModele.Name = "comboModele";
             this.comboModele.Size = new System.Drawing.Size(179, 21);
             this.comboModele.TabIndex = 42;
-            // 
-            // comboAnnee
-            // 
-            this.comboAnnee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboAnnee.Items.AddRange(new object[] {
-            "2021",
-            "2020",
-            "2019",
-            "2018",
-            "2017",
-            "2016",
-            "2015"});
-            this.comboAnnee.Location = new System.Drawing.Point(137, 96);
-            this.comboAnnee.Name = "comboAnnee";
-            this.comboAnnee.Size = new System.Drawing.Size(179, 21);
-            this.comboAnnee.TabIndex = 41;
             // 
             // comboCouleur
             // 
@@ -570,6 +563,7 @@
             this.txtKilometrage.Name = "txtKilometrage";
             this.txtKilometrage.Size = new System.Drawing.Size(179, 20);
             this.txtKilometrage.TabIndex = 30;
+            this.txtKilometrage.Text = "1";
             // 
             // lblCouleur
             // 
@@ -626,7 +620,7 @@
             this.BtnAjouterVehicule.TabIndex = 20;
             this.BtnAjouterVehicule.Text = "Ajouter véhicule";
             this.BtnAjouterVehicule.UseVisualStyleBackColor = true;
-            this.BtnAjouterVehicule.Click += new System.EventHandler(this.BtnAjouterVehicule_Click_1);
+            this.BtnAjouterVehicule.Click += new System.EventHandler(this.BtnAjouterVehicule_Click);
             // 
             // clientBindingSource
             // 
@@ -660,6 +654,22 @@
             // 
             this.vehiculeBindingSource1.DataMember = "Vehicule";
             this.vehiculeBindingSource1.DataSource = this.locationVoitureDataSetBindingSource;
+            // 
+            // comboAnnee
+            // 
+            this.comboAnnee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboAnnee.Items.AddRange(new object[] {
+            "2021",
+            "2020",
+            "2019",
+            "2018",
+            "2017",
+            "2016",
+            "2015"});
+            this.comboAnnee.Location = new System.Drawing.Point(137, 96);
+            this.comboAnnee.Name = "comboAnnee";
+            this.comboAnnee.Size = new System.Drawing.Size(179, 21);
+            this.comboAnnee.TabIndex = 41;
             // 
             // main
             // 
@@ -713,7 +723,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ComboBox comboMarque;
         private System.Windows.Forms.ComboBox comboModele;
-        private System.Windows.Forms.ComboBox comboAnnee;
         private System.Windows.Forms.ComboBox comboCouleur;
         private System.Windows.Forms.ComboBox comboCategorie;
         private System.Windows.Forms.Button button1;
@@ -746,6 +755,7 @@
         private System.Windows.Forms.BindingSource vehiculeBindingSource;
         private LocationVoitureDataSetTableAdapters.VehiculeTableAdapter vehiculeTableAdapter;
         private System.Windows.Forms.BindingSource vehiculeBindingSource1;
+        private System.Windows.Forms.ComboBox comboAnnee;
     }
 }
 

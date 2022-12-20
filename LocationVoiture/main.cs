@@ -39,15 +39,11 @@ namespace LocationVoiture
         public const string ModeleNoPermis = "^[A-Za-z]{4}[0-9]{7}$";
         public const string ModeleAdresse = "^[0-9a-zA-Z ]+$";
 
-
+        
         public void exemple()
         {
             // Mettre les premiers parametre selectioné pour les combobox de la partie véhicule
-            comboMarque.SelectedItem = comboMarque.Items[0];
-            comboModele.SelectedItem = comboModele.Items[0];
-            comboAnnee.SelectedItem = comboAnnee.Items[0];
-            comboCouleur.SelectedItem = comboCouleur.Items[0];
-            comboCategorie.SelectedItem = comboCategorie.Items[0];
+            
         }
         public void VerificationEntree()
         {
@@ -107,8 +103,6 @@ namespace LocationVoiture
         private void main_Load(object sender, EventArgs e)
         {
 
-            
-
             // inspiré du laboratoire ADO.NET : Mode déconnecté ou indirect.
             string Query = "select * from client;select * from Vehicule;";
             Ado.Cmd.CommandText = Query;
@@ -123,9 +117,17 @@ namespace LocationVoiture
 
             Ado.DtVehicule = Ado.Dslocation.Tables[1];
             this.dataGridViewVehicule.DataSource = Ado.DtVehicule;
-
+            
+            
+            
+            comboMarque.SelectedItem = comboMarque.Items[0];
+            comboModele.SelectedItem = comboModele.Items[0];
+            comboAnnee.SelectedItem = comboAnnee.Items[0];
+            comboCouleur.SelectedItem = comboCouleur.Items[0];
+            comboCategorie.SelectedItem = comboCategorie.Items[0];
 
         }
+
         private void btnSoumettre_Click(object sender, EventArgs e)
         {
 
@@ -205,31 +207,30 @@ namespace LocationVoiture
 
             return -1;
         }
-        private void BtnAjouterVehicule_Click_1(object sender, EventArgs e)
+        private void BtnAjouterVehicule_Click(object sender, EventArgs e)
         {
 
             MessageErreur = "";
             
-            i = TrouverIndexRowVehicule(txtIDvehicule.Text);
+            i = TrouverIndexRowVehicule(txtIDvehicule.Text.Trim());
             if (i != -1)
             {
                 MessageErreur += "\nUn autre véhicule existe avec le même numéro de permis";
             }
-            //lblErreurVehicule
+            
 
             if (MessageErreur == "")
             {
                 // ajout dans dataview
                 // inspiré du laboratoire ADO.NET : Mode déconnecté ou indirect
-                DataRow unVehicule = Ado.DtLocation.NewRow();
+                DataRow unVehicule = Ado.DtVehicule.NewRow();
                 unVehicule[0] = txtIDvehicule.Text.Trim();
                 unVehicule[1] = comboMarque.Text.Trim();
                 unVehicule[2] = comboModele.Text.Trim();
-                unVehicule[3] = comboAnnee.Text.Trim();
+                unVehicule[3] = comboAnnee.SelectedValue;
                 unVehicule[4] = comboCouleur.Text.Trim();
                 unVehicule[5] = int.Parse(txtKilometrage.Text.Trim()); ;
-                unVehicule[6] = txtAdresse.Text.Trim();
-                unVehicule[7] = comboCategorie.Text.Trim();
+                unVehicule[6] = comboCategorie.Text.Trim();
                 Ado.DtVehicule.Rows.Add(unVehicule);
 
             }
@@ -372,9 +373,15 @@ namespace LocationVoiture
         
         }
 
-        
+        private void btnSauvegarderVehicule_Click(object sender, EventArgs e)
+        {
 
-        
+        }
+
+        private void BtnSauvegarderVehicule_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
