@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LocationVehicule
 {
+   
     class Client
     {
         protected string Nom;

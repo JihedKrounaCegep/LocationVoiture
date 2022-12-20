@@ -16,6 +16,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace LocationVoiture
 {
+    
     public partial class main : Form
     {
         public main()
@@ -23,8 +24,8 @@ namespace LocationVoiture
             InitializeComponent();
 
         }
-        
-
+        delegate bool CalculAge(DateTime pDate);
+        CalculAge calculAge = new CalculAge(Client.ValiderAge);
         int i;
         AdoNet Ado = new AdoNet();
         public string MessageErreur;
@@ -79,8 +80,8 @@ namespace LocationVoiture
             {
                 MessageErreur += "\nL\'adresse devrait contenir au minimum une lettre et n\'accepte pas les chiffres.";
             }
-
-            if (!Client.ValiderAge(dateTimePicker.Value))
+            
+            if (!calculAge(dateTimePicker.Value))
             {
                 MessageErreur += "\nL\'âge du client est inferieur à 25 ans.";
             }
@@ -117,9 +118,8 @@ namespace LocationVoiture
 
             Ado.DtVehicule = Ado.Dslocation.Tables[1];
             this.dataGridViewVehicule.DataSource = Ado.DtVehicule;
-            
-            
-            
+
+            // selectionner les premiers elements des combobox de la partie voiture
             comboMarque.SelectedItem = comboMarque.Items[0];
             comboModele.SelectedItem = comboModele.Items[0];
             comboAnnee.SelectedItem = comboAnnee.Items[0];
@@ -373,10 +373,6 @@ namespace LocationVoiture
         
         }
 
-        private void btnSauvegarderVehicule_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void BtnSauvegarderVehicule_Click(object sender, EventArgs e)
         {

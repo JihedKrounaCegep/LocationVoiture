@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace LocationVoiture
 {
-    internal class Vehicule
+    interface IVehicule
+    {
+        int Kilometrage { get; set; }
+        void AjusterKilometrage(int pKmparcourus);
+    }
+    internal class Vehicule : IVehicule
     {
         protected string Marque;
         protected string Modele;
         protected int Annee;
         protected string Couleur;
-        protected int Kilometrage;
+        protected int kilometrage;
         protected char Categorie;
         protected int idVehicule;
         public static Dictionary<string, Vehicule> dicVehicule { get; private set; } = new Dictionary<string, Vehicule>();
@@ -23,7 +28,7 @@ namespace LocationVoiture
             this.Modele = "ABC";
             this.Annee = 9999;
             this.Couleur = "BBB";
-            this.Kilometrage = 0;
+            this.kilometrage = 0;
             this.Categorie = 'Z';
             this.idVehicule = 0;
 
@@ -35,7 +40,7 @@ namespace LocationVoiture
             this.Modele = pModele;
             this.Annee = pAnnee;
             this.Couleur = pCouleur;
-            this.Kilometrage = pKilometrage;
+            this.kilometrage = pKilometrage;
             this.Categorie = pCategorie;
 
 
@@ -47,11 +52,13 @@ namespace LocationVoiture
                 "\nKilometrage client: {4}\nCategorie client: {5}",
                 this.Marque, this.Modele, this.Annee, this.Couleur, this.Kilometrage, this.Categorie);
         }
-        public bool AjusterKilometrage(int pKmparcourus)
+        public void AjusterKilometrage(int pKmparcourus)
         {
-            return true; // temporairement useless for now
+            return; // temporairement useless for now
 
         }
+
+
         // inspiré de https://stackoverflow.com/a/36372531/14694236
         public int IdVehicule { get => idVehicule; set => idVehicule = value; }
         public string LeMarque
@@ -78,7 +85,7 @@ namespace LocationVoiture
 
             set { this.Couleur = value; }
         }
-        public int LeKilometrage
+        public int Kilometrage
         {
             get { return this.Kilometrage; }
 
@@ -90,5 +97,6 @@ namespace LocationVoiture
 
             set { this.Categorie = value; }
         }
+
     }
 }
