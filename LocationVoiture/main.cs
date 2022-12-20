@@ -18,7 +18,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace LocationVoiture
 {
-    
+
     public partial class main : Form
     {
         public main()
@@ -43,12 +43,7 @@ namespace LocationVoiture
         public const string ModeleNoPermis = "^[A-Za-z]{4}[0-9]{7}$";
         public const string ModeleAdresse = "^[0-9a-zA-Z ]+$";
 
-        
-        public void exemple()
-        {
-            // Mettre les premiers parametre selectioné pour les combobox de la partie véhicule
-            
-        }
+
         public void VerificationEntree()
         {
             MessageErreur = ""; // probablement inutile
@@ -83,7 +78,7 @@ namespace LocationVoiture
             {
                 MessageErreur += "\nL\'adresse devrait contenir au minimum une lettre et n\'accepte pas les chiffres.";
             }
-            
+
             if (!calculAge(dateTimePicker.Value))
             {
                 MessageErreur += "\nL\'âge du client est inferieur à 25 ans.";
@@ -110,7 +105,7 @@ namespace LocationVoiture
             // inspiré du laboratoire ADO.NET : Mode déconnecté ou indirect.
             string Query = "select * from client;select * from Vehicule;";
             Ado.Cmd.CommandText = Query;
-            
+
             Ado.Cmd.Connection = Ado.Conn;
             Ado.Adapter.SelectCommand = Ado.Cmd;
             Ado.Adapter.Fill(Ado.Dslocation);
@@ -221,17 +216,17 @@ namespace LocationVoiture
         {
 
             MessageErreur = "";
-            
+
             i = TrouverIndexRowVehicule(txtIDvehicule.Text.Trim());
             if (i != -1)
             {
                 MessageErreur += "\nUn autre véhicule existe avec le même numéro de permis";
             }
-            if(txtIDvehicule.Text.Length != 5)
+            if (txtIDvehicule.Text.Length != 5)
             {
 
                 MessageErreur += "\nLe ID du véhicule devrait être 5 charactère";
-            } 
+            }
 
             if (MessageErreur == "")
             {
@@ -257,6 +252,37 @@ namespace LocationVoiture
             }
 
         }
+        private void btnSupprimer_Click(object sender, EventArgs e)
+        {
+            string BarreTitre = "Supprimer un client";
+            /*
+             Possibilité d'utiliser le programme sans base de donnée SQL
+             bool Flag = false;
+             string BarreTitre = "Supprimer un client";
+             Flag = Client.SupprimerClient(txtNoPermis.Text);
+             if (!Flag)
+             {
+                 string Message = "Le client n'a pu être supprimé. Vérifiez le numéro du permis et recommencez.";
+                 MessageBox.Show(Message, BarreTitre, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                 txtNoPermis.Focus();
+             }
+            */
+
+            i = TrouverIndexRow(txtNoPermis.Text);
+            if (i != -1)
+            {
+                Ado.DtLocation.Rows[i].Delete();
+                MessageBox.Show("Le client a été supprimé avec succès.", BarreTitre);
+            }
+            else
+            {
+                string Message = "Le client n'a pu être supprimé. Vérifiez le numéro du permis et recommencez.";
+                MessageBox.Show(Message, BarreTitre, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNoPermis.Focus();
+            }
+
+        }
+
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
             string BarreTitre = "Supprimer un client";
@@ -369,20 +395,20 @@ namespace LocationVoiture
         {
             string BarreTitre = "Rechercher un client";
             i = TrouverIndexRow(txtRechercher.Text);
-                if (i != -1)
-                {
-                
+            if (i != -1)
+            {
+
                 string Message = string.Format("Nom client: {0}\nPrenom du client: {1}\nAdresse client: {2}\nTelephone client: {3}" +
             "\nCourriel client: {4}\nNo Permis client: {5}\nDate naissance client: {6}", Ado.DtLocation.Rows[i][1].ToString(), Ado.DtLocation.Rows[i][2].ToString(), Ado.DtLocation.Rows[i][6].ToString(), Ado.DtLocation.Rows[i][5].ToString(), Ado.DtLocation.Rows[i][4].ToString(), Ado.DtLocation.Rows[i][0].ToString(), Ado.DtLocation.Rows[i][3].ToString());
                 MessageBox.Show(Message, BarreTitre, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-                else
-                {
-                    
-                    string Message = "Le client n'a pu être modifié. Vérifiez le numéro du permis et recommencez.";
-                    MessageBox.Show(Message, BarreTitre, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtNoPermis.Focus();
-                }
+            else
+            {
+
+                string Message = "Le client n'a pu être modifié. Vérifiez le numéro du permis et recommencez.";
+                MessageBox.Show(Message, BarreTitre, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNoPermis.Focus();
+            }
         }
 
 
@@ -402,19 +428,55 @@ namespace LocationVoiture
 
         private void Btn_modiferVehicule_click(object sender, EventArgs e)
         {
-            DataRow unVehicule = AdoVehicule.DtVehicule.NewRow();
-            unVehicule[0] = txtIDvehicule.Text.Trim();
-            unVehicule[1] = comboMarque.Text.Trim();
-            unVehicule[2] = comboModele.Text.Trim();
-            unVehicule[3] = comboAnnee.Text.Trim();
-            unVehicule[4] = comboCouleur.Text.Trim();
-            unVehicule[5] = int.Parse(txtKilometrage.Text.Trim()); ;
-            unVehicule[6] = comboCategorie.Text.Trim();
-            AdoVehicule.DtVehicule.Rows.Add(unVehicule);
+
+            bool Flag = false;
+            string BarreTitre = "Modifier une voiture";
+            if (txtKilometrage.Text == "" || txtIDvehicule.Text == "")
+            {
+                Flag = true;
+                string Message = "La voiture n'a pu être modifié. Veuillez entrer une valeur pour le nombre de kilométre et le id du véhicule";
+                MessageBox.Show(Message, BarreTitre, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNoPermis.Focus();
+            }
+            else if (!txtKilometrage.Text.All(Char.IsDigit))
+            {
+                Flag = true;
+                string Message = "Veuillez entrer un nombre de kilometrage composé de chiffre";
+                MessageBox.Show(Message, BarreTitre, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNoPermis.Focus();
+            }
+            if (Flag == false)
+            {
+                // Vehicule modificationVehicule = new Vehicule(); à travailler
+                //Flag = Client.ModifierClient(txtNoPermis.Text, modificationClient);
+                i = TrouverIndexRowVehicule(txtIDvehicule.Text.Trim());
+                if (i == -1)
+                {
+                    string Message = "La voiture été trouvé. Vérifiez le ID de la voiture et recommencez.";
+                    MessageBox.Show(Message, BarreTitre, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtNoPermis.Focus();
+                }
+                else
+                {
+
+                    AdoVehicule.DtVehicule.Rows[i][1] = comboMarque.Text.Trim();
+                    AdoVehicule.DtVehicule.Rows[i][2] = comboModele.Text.Trim();
+                    AdoVehicule.DtVehicule.Rows[i][3] = comboAnnee.Text.Trim();
+                    AdoVehicule.DtVehicule.Rows[i][4] = comboCouleur.Text.Trim();
+                    AdoVehicule.DtVehicule.Rows[i][5] = int.Parse(txtKilometrage.Text.Trim());
+                    AdoVehicule.DtVehicule.Rows[i][6] = comboCategorie.Text.Trim();
+
+
+                    MessageBox.Show("La voiture a été modifier avec succès.", BarreTitre);
+                    //lblDeLobjet.Text = modificationClient.ToString(); à travailler
+                    lblDeLobjet.Visible = true;
+                }
+
+            }
+
+
         }
 
-
-        
     }
 }
 
