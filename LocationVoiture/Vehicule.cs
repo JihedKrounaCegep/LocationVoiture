@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace LocationVoiture
 {
+    /// <summary>
+    /// interface du véhicule
+    /// </summary>
     interface IVehicule
     {
         int Kilometrage { get; set; }
         void AjusterKilometrage(int pKmparcourus);
     }
+
     internal class Vehicule : IVehicule
     {
         protected string Marque;
@@ -33,6 +37,16 @@ namespace LocationVoiture
             this.idVehicule = 0;
 
         }
+        /// <summary>
+        /// classe véhicule
+        /// </summary>
+        /// <param name="p_id">id du véhicule</param>
+        /// <param name="pMarque">marque du véhicule</param>
+        /// <param name="pModele">modèle du véhicule</param>
+        /// <param name="pAnnee">année de conception du véhicule</param>
+        /// <param name="pCouleur">couleur du véhicule</param>
+        /// <param name="pKilometrage">kilometrage du véhicule</param>
+        /// <param name="pCategorie">catégorie du véhicule</param>
         public Vehicule(int p_id, string pMarque, string pModele, int pAnnee, string pCouleur, int pKilometrage, char pCategorie)
         {
             this.IdVehicule = p_id;
@@ -46,15 +60,23 @@ namespace LocationVoiture
 
 
         }
+        /// <summary>
+        /// affiche tout les valeurs de la classe
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return string.Format("Marque client: {0}\nModele du client: {1}\nAnnee client: {2}\nCouleur client: {3}" +
                 "\nKilometrage client: {4}\nCategorie client: {5}",
                 this.Marque, this.Modele, this.Annee, this.Couleur, this.Kilometrage, this.Categorie);
         }
+        /// <summary>
+        /// une méthode qui va ajouter du kilométrage à l'objet véhicule
+        /// </summary>
+        /// <param name="pKmparcourus">nombre de kilométre à ajouter</param>
         public void AjusterKilometrage(int pKmparcourus)
         {
-            return; // temporairement useless for now
+            this.kilometrage = this.kilometrage + pKmparcourus;
 
         }
 

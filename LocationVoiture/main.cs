@@ -26,12 +26,15 @@ namespace LocationVoiture
             InitializeComponent();
 
         }
+        // délégation de la méthode ValiderAge
         delegate bool CalculAge(DateTime pDate);
         CalculAge calculAge = new CalculAge(Client.ValiderAge);
         int i;
+        // initialisation des objets AdoNet
         AdoNet Ado = new AdoNet();
         AdoNet AdoVehicule = new AdoNet();
         public string MessageErreur;
+        // regex pour le nom, prenom , no téléphone, curriel, no permis et adresse du client
         public const string ModeleNom = "^[a-zA-Z]+$";
         public const string ModelePrenom = "^[a-zA-Z]+$";
         public const string ModelTelephone = "^[0-9]{10}$";
@@ -43,7 +46,9 @@ namespace LocationVoiture
         public const string ModeleNoPermis = "^[A-Za-z]{4}[0-9]{7}$";
         public const string ModeleAdresse = "^[0-9a-zA-Z ]+$";
 
-
+        /// <summary>
+        /// methode pour vérifier les données entrée par l'utilisateur pour la création de client
+        /// </summary>
         public void VerificationEntree()
         {
             MessageErreur = ""; // probablement inutile
@@ -132,7 +137,10 @@ namespace LocationVoiture
             comboCategorie.SelectedItem = comboCategorie.Items[0];
 
         }
-
+        /// <summary>
+        /// méthode pour le bouton de soumission du client qui permet
+        /// d'ajouter un client à la base de donnée suite à la vérification des entrées et ensuite l'affiche
+        /// </summary>
         private void btnSoumettre_Click(object sender, EventArgs e)
         {
 
@@ -187,6 +195,11 @@ namespace LocationVoiture
             }
 
         }
+        /// <summary>
+        /// méthode pour trouver si l'objet existe dans la liste des clients et retourne l'index
+        /// </summary>
+        /// <param name="p_noPermis">numéro du permis du client</param>
+        /// <returns>index du client ou -1 si il n'a pas été trouvé</returns>
         private int TrouverIndexRow(string p_noPermis)
         {
 
@@ -200,6 +213,11 @@ namespace LocationVoiture
 
             return -1;
         }
+        /// <summary>
+        /// méthode pour trouver si l'objet existe dans la liste des véhicules et retourne l'index
+        /// </summary>
+        /// <param name="p_noPermis">numéro du permis du véhicules</param>
+        /// <returns>index du véhicule ou -1 si il n'a pas été trouvé</returns>
         private int TrouverIndexRowVehicule(string p_idVehicule)
         {
             for (int i = 0; i < AdoVehicule.DtVehicule.Rows.Count; i++)
@@ -212,6 +230,11 @@ namespace LocationVoiture
 
             return -1;
         }
+
+        /// <summary>
+        /// méthode pour le bouton ajouter qui permet d'ajouter un véhicule à la base de donnée et l'affiche ensuite après plusieurs validations
+        /// </summary>
+
         private void BtnAjouterVehicule_Click(object sender, EventArgs e)
         {
 
@@ -252,36 +275,10 @@ namespace LocationVoiture
             }
 
         }
-        private void btnSupprimer_Click(object sender, EventArgs e)
-        {
-            string BarreTitre = "Supprimer un client";
-            /*
-             Possibilité d'utiliser le programme sans base de donnée SQL
-             bool Flag = false;
-             string BarreTitre = "Supprimer un client";
-             Flag = Client.SupprimerClient(txtNoPermis.Text);
-             if (!Flag)
-             {
-                 string Message = "Le client n'a pu être supprimé. Vérifiez le numéro du permis et recommencez.";
-                 MessageBox.Show(Message, BarreTitre, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                 txtNoPermis.Focus();
-             }
-            */
 
-            i = TrouverIndexRow(txtNoPermis.Text);
-            if (i != -1)
-            {
-                Ado.DtLocation.Rows[i].Delete();
-                MessageBox.Show("Le client a été supprimé avec succès.", BarreTitre);
-            }
-            else
-            {
-                string Message = "Le client n'a pu être supprimé. Vérifiez le numéro du permis et recommencez.";
-                MessageBox.Show(Message, BarreTitre, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtNoPermis.Focus();
-            }
-
-        }
+        /// <summary>
+        /// méthode pour le bouton supprimer qui permet de supprimer un client dans la base de donnée suite à plusieurs vérification
+        /// </summary>
 
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
@@ -313,7 +310,30 @@ namespace LocationVoiture
             }
 
         }
+        /// <summary>
+        /// méthode pour le bouton supprimer qui permet de supprimer un véhicule dans la base de donnée suite à plusieurs vérification
+        /// </summary>
+        private void BtnSupprimerVehicule_Click(object sender, EventArgs e)
+        {
+            string BarreTitre = "Supprimer un vehicule";
 
+            i = TrouverIndexRowVehicule(txtIDvehicule.Text);
+            if (i != -1)
+            {
+                AdoVehicule.DtVehicule.Rows[i].Delete();
+                MessageBox.Show("Le vehicule a été supprimé avec succès.", BarreTitre);
+            }
+            else
+            {
+                string Message = "Le vehicule n'a pu être supprimé. Vérifiez le ID du véhicule et recommencez.";
+                MessageBox.Show(Message, BarreTitre, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtNoPermis.Focus();
+            }
+
+        }
+        /// <summary>
+        /// méthode pour le bouton modifier qui permet de modifier un client la base de donnée suite à la vérification des entrées et ensuite l'affiche le changement
+        /// </summary>
         private void BtnModifier_Click(object sender, EventArgs e)
         {
 
@@ -376,7 +396,9 @@ namespace LocationVoiture
 
         }
 
-
+        /// <summary>
+        /// méthode pour le bouton sauvegarder qui permet de sauver tout les changements dans le programme à la base de données 
+        /// </summary>
         private void BtnSauvegarder_Click(object sender, EventArgs e)
         {
             // inspiré du laboratoire ADO.NET : Mode déconnecté ou indirect
@@ -390,7 +412,9 @@ namespace LocationVoiture
                 MessageBox.Show(ex.Message);
             }
         }
-
+        /// <summary>
+        /// méthode pour la recherche du client avec le numéro du permit ensuite l'affichage des informations de celui-ci 
+        /// </summary>
         private void BtnRechercher_Click(object sender, EventArgs e)
         {
             string BarreTitre = "Rechercher un client";
@@ -411,7 +435,9 @@ namespace LocationVoiture
             }
         }
 
-
+        /// <summary>
+        /// méthode pour le bouton sauvegarder qui permet de sauver tout les changements dans le programme à la base de données 
+        /// </summary>
         private void BtnSauvegarderVehicule_Click(object sender, EventArgs e)
         {
             try
@@ -425,7 +451,9 @@ namespace LocationVoiture
             }
         }
 
-
+        /// <summary>
+        /// bouton modifier qui permet de modifier un véhicule de la base de donnée suite à la vérification des entrées et ensuite l'affiche le changement
+        /// </summary>
         private void Btn_modiferVehicule_click(object sender, EventArgs e)
         {
 

@@ -43,6 +43,12 @@ namespace LocationVehicule
                 "\nCourriel client: {4}\nNo Permis client: {5}\nDate naissance client: {6}",
                 this.Nom, this.Prenom, this.Adresse, this.Telephone, this.Courriel, this.NoPermis, this.DateNaissance.ToString("mm-dd-yyyy"));
         }
+        
+        /// <summary>
+        /// metode qui permet de vérifier que l'âge du client est au dessus de 25 ans ceux-ci est la politque de l'entreprise.
+        /// </summary>
+        /// <param name="pDate">age du client</param>
+        /// <returns></returns>
         public static bool ValiderAge(DateTime pDate)
         {
 
@@ -60,13 +66,21 @@ namespace LocationVehicule
             else { return false; }
 
         }
-
+        /// <summary>
+        /// methode pour ajouter le client à la liste de client
+        /// </summary>
+        /// <param name="pClient">le client à ajouter</param>
         public static void AjouterClient(Client pClient)
         {
             dicClient.Add(pClient.NoPermis, pClient);
 
         }
         //Possibilité d'utiliser le programme sans base de donnée SQL
+        /// <summary>
+        /// methode pour supprimmer un client de la liste de client
+        /// </summary>
+        /// <param name="pNoPermis"></param>
+        /// <returns></returns>
         public static bool SupprimerClient(string pNoPermis)
         {
             bool Flag = false;
@@ -86,6 +100,12 @@ namespace LocationVehicule
         }
 
         //Possibilité d'utiliser le programme sans base de donnée SQL
+        /// <summary>
+        /// methode pour verfier que le client existe dans la liste de client
+        /// </summary>
+        /// <param name="pNoPermis">numéro du permis du client</param>
+        /// <param name="pObj">objet client à chercher</param>
+        /// <returns></returns>
         public static bool ModifierClient(string pNoPermis, Client pObj)
         {
             bool Flag = false;
@@ -101,7 +121,7 @@ namespace LocationVehicule
             }
 
             return Flag;
-        }
+        } 
         public string LeNom
         {
             get { return this.Nom; }

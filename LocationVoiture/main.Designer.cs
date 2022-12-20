@@ -57,8 +57,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.txtIDvehicule = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnRechercherVehicule = new System.Windows.Forms.Button();
             this.btnSauvegarderVehicule = new System.Windows.Forms.Button();
             this.dataGridViewVehicule = new System.Windows.Forms.DataGridView();
             this.comboMarque = new System.Windows.Forms.ComboBox();
@@ -67,7 +65,7 @@
             this.comboCouleur = new System.Windows.Forms.ComboBox();
             this.comboCategorie = new System.Windows.Forms.ComboBox();
             this.btnModifierVéhicule = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BtnSupprimerVehicule = new System.Windows.Forms.Button();
             this.lblErreurVehicule = new System.Windows.Forms.Label();
             this.lblCategorie = new System.Windows.Forms.Label();
             this.lblKm = new System.Windows.Forms.Label();
@@ -360,8 +358,6 @@
             // 
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.txtIDvehicule);
-            this.tabPage2.Controls.Add(this.textBox1);
-            this.tabPage2.Controls.Add(this.btnRechercherVehicule);
             this.tabPage2.Controls.Add(this.btnSauvegarderVehicule);
             this.tabPage2.Controls.Add(this.dataGridViewVehicule);
             this.tabPage2.Controls.Add(this.comboMarque);
@@ -370,7 +366,7 @@
             this.tabPage2.Controls.Add(this.comboCouleur);
             this.tabPage2.Controls.Add(this.comboCategorie);
             this.tabPage2.Controls.Add(this.btnModifierVéhicule);
-            this.tabPage2.Controls.Add(this.button2);
+            this.tabPage2.Controls.Add(this.BtnSupprimerVehicule);
             this.tabPage2.Controls.Add(this.lblErreurVehicule);
             this.tabPage2.Controls.Add(this.lblCategorie);
             this.tabPage2.Controls.Add(this.lblKm);
@@ -405,24 +401,6 @@
             this.txtIDvehicule.Size = new System.Drawing.Size(179, 20);
             this.txtIDvehicule.TabIndex = 48;
             this.txtIDvehicule.Text = "123123";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(485, 286);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(114, 20);
-            this.textBox1.TabIndex = 47;
-            this.textBox1.Text = "123123";
-            // 
-            // btnRechercherVehicule
-            // 
-            this.btnRechercherVehicule.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRechercherVehicule.Location = new System.Drawing.Point(485, 230);
-            this.btnRechercherVehicule.Name = "btnRechercherVehicule";
-            this.btnRechercherVehicule.Size = new System.Drawing.Size(114, 50);
-            this.btnRechercherVehicule.TabIndex = 46;
-            this.btnRechercherVehicule.Text = "Rechercher";
-            this.btnRechercherVehicule.UseVisualStyleBackColor = true;
             // 
             // btnSauvegarderVehicule
             // 
@@ -535,15 +513,16 @@
             this.btnModifierVéhicule.UseVisualStyleBackColor = true;
             this.btnModifierVéhicule.Click += new System.EventHandler(this.Btn_modiferVehicule_click);
             // 
-            // button2
+            // BtnSupprimerVehicule
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(256, 230);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(103, 50);
-            this.button2.TabIndex = 37;
-            this.button2.Text = "Supprimer un véhicule";
-            this.button2.UseVisualStyleBackColor = true;
+            this.BtnSupprimerVehicule.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSupprimerVehicule.Location = new System.Drawing.Point(256, 230);
+            this.BtnSupprimerVehicule.Name = "BtnSupprimerVehicule";
+            this.BtnSupprimerVehicule.Size = new System.Drawing.Size(103, 50);
+            this.BtnSupprimerVehicule.TabIndex = 37;
+            this.BtnSupprimerVehicule.Text = "Supprimer un véhicule";
+            this.BtnSupprimerVehicule.UseVisualStyleBackColor = true;
+            this.BtnSupprimerVehicule.Click += new System.EventHandler(this.BtnSupprimerVehicule_Click);
             // 
             // lblErreurVehicule
             // 
@@ -727,7 +706,7 @@
         private System.Windows.Forms.ComboBox comboCouleur;
         private System.Windows.Forms.ComboBox comboCategorie;
         private System.Windows.Forms.Button btnModifierVéhicule;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BtnSupprimerVehicule;
         private System.Windows.Forms.Label lblErreurVehicule;
         private System.Windows.Forms.Label lblCategorie;
         private System.Windows.Forms.Label lblKm;
@@ -747,8 +726,6 @@
         private System.Windows.Forms.Button BtnSauvegarder;
         private System.Windows.Forms.TextBox txtRechercher;
         private System.Windows.Forms.Button BtnRechercher;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button btnRechercherVehicule;
         private System.Windows.Forms.Button btnSauvegarderVehicule;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtIDvehicule;

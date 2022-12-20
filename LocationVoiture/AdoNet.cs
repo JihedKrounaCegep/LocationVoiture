@@ -3,13 +3,14 @@ using System.Data.SqlClient;
 using System.Data;
 namespace LocationVehicule
 {
+    /// <summary>
+    /// classe AdoNet afin d'établir la connection avec la base de donnée
+    /// </summary>
     public class AdoNet
     {
         private SqlConnection conn;
         private SqlCommand cmd;
         private SqlDataAdapter adapter;
-        private SqlDataAdapter adapterVehicule;
-        //adapterVehicule
         private SqlDataReader reader;
         private string connectionstr;
         private DataTable dtLocation;
@@ -21,12 +22,10 @@ namespace LocationVehicule
         public SqlCommand Cmd { get => cmd; set => cmd = value; }
         public SqlDataReader Reader { get => reader; set => reader = value; }
         public SqlDataAdapter Adapter { get => adapter; set => adapter = value; }
-        public SqlDataAdapter AdapterVehicule { get => adapterVehicule; set => adapterVehicule = value; }
         public string ConnectionStr { get => connectionstr; }
         public DataTable DtLocation { get => dtLocation; set => dtLocation = value; }
         public DataSet Dslocation { get => dsLocation; set => dsLocation = value; }
         public DataTable DtVehicule { get => dtVehicule; set => dtVehicule = value; }
-
 
         public AdoNet()
         {
