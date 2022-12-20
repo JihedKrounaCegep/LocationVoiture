@@ -79,6 +79,9 @@
   <ItemGroup>
     <Compile Include="AdoNet.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="LocationVoitureDataSet.cs">
+      <DependentUpon>LocationVoitureDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Vehicule.cs" />
     <Compile Include="Details_Location.cs" />
     <Compile Include="LocationVoitureDataSet.Designer.cs">

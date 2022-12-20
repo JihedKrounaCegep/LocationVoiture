@@ -21,13 +21,10 @@ namespace LocationVoiture
         public main()
         {
             InitializeComponent();
-            // Mettre les premiers parametre selectioné pour les combobox de la partie véhicule
-            comboMarque.SelectedItem = comboMarque.Items[0];
-            comboModele.SelectedItem = comboModele.Items[0];
-            comboAnnee.SelectedItem = comboAnnee.Items[0];
-            comboCouleur.SelectedItem = comboCouleur.Items[0];
-            comboCategorie.SelectedItem = comboCategorie.Items[0];
+
         }
+        
+
         int i;
         AdoNet Ado = new AdoNet();
         public string MessageErreur;
@@ -43,7 +40,15 @@ namespace LocationVoiture
         public const string ModeleAdresse = "^[0-9a-zA-Z ]+$";
 
 
-
+        public void exemple()
+        {
+            // Mettre les premiers parametre selectioné pour les combobox de la partie véhicule
+            comboMarque.SelectedItem = comboMarque.Items[0];
+            comboModele.SelectedItem = comboModele.Items[0];
+            comboAnnee.SelectedItem = comboAnnee.Items[0];
+            comboCouleur.SelectedItem = comboCouleur.Items[0];
+            comboCategorie.SelectedItem = comboCategorie.Items[0];
+        }
         public void VerificationEntree()
         {
             MessageErreur = ""; // probablement inutile
@@ -101,11 +106,11 @@ namespace LocationVoiture
 
         private void main_Load(object sender, EventArgs e)
         {
-           
+
+            
 
             // inspiré du laboratoire ADO.NET : Mode déconnecté ou indirect.
-            string Query = "select * from client;";
-            string Query2 = "select * from Vehicule;";
+            string Query = "select * from client;select * from Vehicule;";
             Ado.Cmd.CommandText = Query;
             
             Ado.Cmd.Connection = Ado.Conn;
@@ -116,13 +121,9 @@ namespace LocationVoiture
             this.dataGridViewClient.DataSource = Ado.DtLocation;
 
 
-
-            Ado.Cmd.CommandText = Query2;
-            Ado.Adapter.SelectCommand = Ado.Cmd;
-            Ado.Adapter.Fill(Ado.DsVehicule);
-            Ado.DtVehicule = Ado.DsVehicule.Tables[0];
+            Ado.DtVehicule = Ado.Dslocation.Tables[1];
             this.dataGridViewVehicule.DataSource = Ado.DtVehicule;
-            
+
 
         }
         private void btnSoumettre_Click(object sender, EventArgs e)
@@ -224,7 +225,7 @@ namespace LocationVoiture
                 unVehicule[0] = txtIDvehicule.Text.Trim();
                 unVehicule[1] = comboMarque.Text.Trim();
                 unVehicule[2] = comboModele.Text.Trim();
-                unVehicule[3] = DateTime.Parse(comboAnnee.Text.Trim());
+                unVehicule[3] = comboAnnee.Text.Trim();
                 unVehicule[4] = comboCouleur.Text.Trim();
                 unVehicule[5] = int.Parse(txtKilometrage.Text.Trim()); ;
                 unVehicule[6] = txtAdresse.Text.Trim();
