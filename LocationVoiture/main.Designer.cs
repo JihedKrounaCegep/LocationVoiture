@@ -90,7 +90,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.BtnAjouterLocation = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -672,7 +672,7 @@
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.textBox2);
-            this.tabPage3.Controls.Add(this.button4);
+            this.tabPage3.Controls.Add(this.BtnAjouterLocation);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -765,15 +765,16 @@
             this.textBox2.TabIndex = 56;
             this.textBox2.Text = "1";
             // 
-            // button4
+            // BtnAjouterLocation
             // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(38, 223);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(103, 50);
-            this.button4.TabIndex = 50;
-            this.button4.Text = "Ajouter location";
-            this.button4.UseVisualStyleBackColor = true;
+            this.BtnAjouterLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAjouterLocation.Location = new System.Drawing.Point(38, 223);
+            this.BtnAjouterLocation.Name = "BtnAjouterLocation";
+            this.BtnAjouterLocation.Size = new System.Drawing.Size(103, 50);
+            this.BtnAjouterLocation.TabIndex = 50;
+            this.BtnAjouterLocation.Text = "Ajouter location";
+            this.BtnAjouterLocation.UseVisualStyleBackColor = true;
+            this.BtnAjouterLocation.Click += new System.EventHandler(this.BtnAjouterLocation_Click);
             // 
             // textBox3
             // 
@@ -951,7 +952,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button BtnAjouterLocation;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox4;

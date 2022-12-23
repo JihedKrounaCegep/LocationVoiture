@@ -33,6 +33,7 @@ namespace LocationVoiture
         // initialisation des objets AdoNet
         AdoNet Ado = new AdoNet();
         AdoNet AdoVehicule = new AdoNet();
+        AdoNet AdoLocation = new AdoNet();
         public string MessageErreur;
         // regex pour le nom, prenom , no téléphone, curriel, no permis et adresse du client
         public const string ModeleNom = "^[a-zA-Z]+$";
@@ -115,8 +116,8 @@ namespace LocationVoiture
             Ado.Adapter.SelectCommand = Ado.Cmd;
             Ado.Adapter.Fill(Ado.Dslocation);
 
-            Ado.DtLocation = Ado.Dslocation.Tables[0];
-            this.dataGridViewClient.DataSource = Ado.DtLocation;
+            Ado.DtClient = Ado.Dslocation.Tables[0];
+            this.dataGridViewClient.DataSource = Ado.DtClient;
 
             string Query1 = "select * from Vehicule;";
             AdoVehicule.Cmd.CommandText = Query1;
@@ -170,7 +171,7 @@ namespace LocationVoiture
             {
                 // ajout dans dataview
                 // inspiré du laboratoire ADO.NET : Mode déconnecté ou indirect
-                DataRow UnClient = Ado.DtLocation.NewRow();
+                DataRow UnClient = Ado.DtClient.NewRow();
                 UnClient[0] = txtNoPermis.Text.Trim();
                 UnClient[1] = txtNom.Text.Trim();
                 UnClient[2] = txtPrenom.Text.Trim();
@@ -178,7 +179,7 @@ namespace LocationVoiture
                 UnClient[4] = txtCourriel.Text.Trim();
                 UnClient[5] = txtTel.Text.Trim();
                 UnClient[6] = txtAdresse.Text.Trim();
-                Ado.DtLocation.Rows.Add(UnClient);
+                Ado.DtClient.Rows.Add(UnClient);
 
 
                 //Possibilité d'utiliser le programme sans base de donnée SQL
@@ -203,9 +204,9 @@ namespace LocationVoiture
         private int TrouverIndexRow(string p_noPermis)
         {
 
-            for (int i = 0; i < Ado.DtLocation.Rows.Count; i++)
+            for (int i = 0; i < Ado.DtClient.Rows.Count; i++)
             {
-                if (p_noPermis == Ado.DtLocation.Rows[i][0].ToString())
+                if (p_noPermis == Ado.DtClient.Rows[i][0].ToString())
                 {
                     return i;
                 }
@@ -299,7 +300,7 @@ namespace LocationVoiture
             i = TrouverIndexRow(txtNoPermis.Text);
             if (i != -1)
             {
-                Ado.DtLocation.Rows[i].Delete();
+                Ado.DtClient.Rows[i].Delete();
                 MessageBox.Show("Le client a été supprimé avec succès.", BarreTitre);
             }
             else
@@ -352,7 +353,7 @@ namespace LocationVoiture
             {
                 Client modificationClient = new Client(txtNom.Text, txtPrenom.Text, txtAdresse.Text, txtTel.Text, txtCourriel.Text, txtNoPermis.Text, dateTimePicker.Value);
                 //Flag = Client.ModifierClient(txtNoPermis.Text, modificationClient);
-                foreach (DataRow row in Ado.DtLocation.Rows)
+                foreach (DataRow row in Ado.DtClient.Rows)
                 {
                     // inspiré du laboratoire ADO.NET : Mode déconnecté ou indirect 
                     if (row[0].ToString() == txtNoPermis.Text)
@@ -371,12 +372,12 @@ namespace LocationVoiture
                     i = TrouverIndexRow(txtNoPermis.Text);
                     if (i != -1)
                     {
-                        Ado.DtLocation.Rows[i][1] = txtNom.Text.Trim();
-                        Ado.DtLocation.Rows[i][2] = txtPrenom.Text.Trim();
-                        Ado.DtLocation.Rows[i][3] = dateTimePicker.Value;
-                        Ado.DtLocation.Rows[i][4] = txtCourriel.Text.Trim();
-                        Ado.DtLocation.Rows[i][5] = txtTel.Text.Trim();
-                        Ado.DtLocation.Rows[i][6] = txtAdresse.Text.Trim();
+                        Ado.DtClient.Rows[i][1] = txtNom.Text.Trim();
+                        Ado.DtClient.Rows[i][2] = txtPrenom.Text.Trim();
+                        Ado.DtClient.Rows[i][3] = dateTimePicker.Value;
+                        Ado.DtClient.Rows[i][4] = txtCourriel.Text.Trim();
+                        Ado.DtClient.Rows[i][5] = txtTel.Text.Trim();
+                        Ado.DtClient.Rows[i][6] = txtAdresse.Text.Trim();
                     }
                     else
                     {
@@ -405,7 +406,7 @@ namespace LocationVoiture
             try
             {
                 SqlCommandBuilder builder = new SqlCommandBuilder(Ado.Adapter);
-                Ado.Adapter.Update(Ado.Dslocation, Ado.DtLocation.ToString());
+                Ado.Adapter.Update(Ado.Dslocation, Ado.DtClient.ToString());
             }
             catch (Exception ex)
             {
@@ -423,7 +424,7 @@ namespace LocationVoiture
             {
 
                 string Message = string.Format("Nom client: {0}\nPrenom du client: {1}\nAdresse client: {2}\nTelephone client: {3}" +
-            "\nCourriel client: {4}\nNo Permis client: {5}\nDate naissance client: {6}", Ado.DtLocation.Rows[i][1].ToString(), Ado.DtLocation.Rows[i][2].ToString(), Ado.DtLocation.Rows[i][6].ToString(), Ado.DtLocation.Rows[i][5].ToString(), Ado.DtLocation.Rows[i][4].ToString(), Ado.DtLocation.Rows[i][0].ToString(), Ado.DtLocation.Rows[i][3].ToString());
+            "\nCourriel client: {4}\nNo Permis client: {5}\nDate naissance client: {6}", Ado.DtClient.Rows[i][1].ToString(), Ado.DtClient.Rows[i][2].ToString(), Ado.DtClient.Rows[i][6].ToString(), Ado.DtClient.Rows[i][5].ToString(), Ado.DtClient.Rows[i][4].ToString(), Ado.DtClient.Rows[i][0].ToString(), Ado.DtClient.Rows[i][3].ToString());
                 MessageBox.Show(Message, BarreTitre, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
@@ -443,7 +444,7 @@ namespace LocationVoiture
             try
             {
                 SqlCommandBuilder builder = new SqlCommandBuilder(AdoVehicule.Adapter);
-                AdoVehicule.Adapter.Update(AdoVehicule.Dslocation, Ado.DtLocation.ToString());
+                AdoVehicule.Adapter.Update(AdoVehicule.Dslocation, Ado.DtClient.ToString());
             }
             catch (Exception ex)
             {
@@ -505,6 +506,10 @@ namespace LocationVoiture
 
         }
 
+        private void BtnAjouterLocation_Click(object sender, EventArgs e)
+        {
+            return;
+        }
     }
 }
 
