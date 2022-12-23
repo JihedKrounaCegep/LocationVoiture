@@ -76,45 +76,45 @@
             this.lblMarque = new System.Windows.Forms.Label();
             this.lblVehicule = new System.Windows.Forms.Label();
             this.BtnAjouterVehicule = new System.Windows.Forms.Button();
-            this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.datasetVehiculeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.vehiculeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.vehiculeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.BtnFiltrer = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtKmMax = new System.Windows.Forms.TextBox();
+            this.txtKmMin = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewLocation = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.BtnAjouterLocation = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.locationVoitureDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.locationVoitureDataSet = new LocationVoiture.LocationVoitureDataSet();
+            this.datasetVehiculeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.vehiculeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.vehiculeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.clientTableAdapter = new LocationVoiture.LocationVoitureDataSetTableAdapters.clientTableAdapter();
             this.vehiculeTableAdapter = new LocationVoiture.LocationVoitureDataSetTableAdapters.VehiculeTableAdapter();
-            this.button5 = new System.Windows.Forms.Button();
             this.LocationTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicule)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLocation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datasetVehiculeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehiculeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehiculeBindingSource1)).BeginInit();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // LocationTab
@@ -639,34 +639,19 @@
             this.BtnAjouterVehicule.UseVisualStyleBackColor = true;
             this.BtnAjouterVehicule.Click += new System.EventHandler(this.BtnAjouterVehicule_Click);
             // 
-            // clientBindingSource
-            // 
-            this.clientBindingSource.DataMember = "client";
-            this.clientBindingSource.DataSource = this.locationVoitureDataSetBindingSource;
-            // 
-            // vehiculeBindingSource
-            // 
-            this.vehiculeBindingSource.DataMember = "Vehicule";
-            this.vehiculeBindingSource.DataSource = this.locationVoitureDataSetBindingSource;
-            // 
-            // vehiculeBindingSource1
-            // 
-            this.vehiculeBindingSource1.DataMember = "Vehicule";
-            this.vehiculeBindingSource1.DataSource = this.locationVoitureDataSetBindingSource;
-            // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.button5);
+            this.tabPage3.Controls.Add(this.BtnFiltrer);
             this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.label13);
-            this.tabPage3.Controls.Add(this.textBox5);
-            this.tabPage3.Controls.Add(this.textBox4);
+            this.tabPage3.Controls.Add(this.txtKmMax);
+            this.tabPage3.Controls.Add(this.txtKmMin);
             this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.textBox3);
             this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Controls.Add(this.textBox1);
             this.tabPage3.Controls.Add(this.button1);
-            this.tabPage3.Controls.Add(this.dataGridView1);
+            this.tabPage3.Controls.Add(this.dataGridViewLocation);
             this.tabPage3.Controls.Add(this.button2);
             this.tabPage3.Controls.Add(this.button3);
             this.tabPage3.Controls.Add(this.label11);
@@ -680,6 +665,69 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Location";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // BtnFiltrer
+            // 
+            this.BtnFiltrer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnFiltrer.Location = new System.Drawing.Point(397, 130);
+            this.BtnFiltrer.Name = "BtnFiltrer";
+            this.BtnFiltrer.Size = new System.Drawing.Size(164, 29);
+            this.BtnFiltrer.TabIndex = 77;
+            this.BtnFiltrer.Text = "Filtrer";
+            this.BtnFiltrer.UseVisualStyleBackColor = true;
+            this.BtnFiltrer.Click += new System.EventHandler(this.BtnFiltrer_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(374, 92);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(108, 13);
+            this.label14.TabIndex = 76;
+            this.label14.Text = "Kilométrage maximum";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(374, 60);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(105, 13);
+            this.label13.TabIndex = 75;
+            this.label13.Text = "Kilométrage minimum";
+            // 
+            // txtKmMax
+            // 
+            this.txtKmMax.Location = new System.Drawing.Point(494, 89);
+            this.txtKmMax.Name = "txtKmMax";
+            this.txtKmMax.Size = new System.Drawing.Size(80, 20);
+            this.txtKmMax.TabIndex = 74;
+            this.txtKmMax.Text = "1";
+            // 
+            // txtKmMin
+            // 
+            this.txtKmMin.Location = new System.Drawing.Point(494, 57);
+            this.txtKmMin.Name = "txtKmMin";
+            this.txtKmMin.Size = new System.Drawing.Size(80, 20);
+            this.txtKmMin.TabIndex = 73;
+            this.txtKmMin.Text = "1";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(349, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(522, 31);
+            this.label10.TabIndex = 72;
+            this.label10.Text = "Filtre du nombre de km que le client a fait :";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(137, 31);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(179, 20);
+            this.textBox3.TabIndex = 71;
+            this.textBox3.Text = "1";
             // 
             // label9
             // 
@@ -708,19 +756,20 @@
             this.button1.Text = "Sauvegarder";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dataGridViewLocation
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(26, 332);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(838, 150);
-            this.dataGridView1.TabIndex = 67;
+            this.dataGridViewLocation.AllowUserToAddRows = false;
+            this.dataGridViewLocation.AllowUserToDeleteRows = false;
+            this.dataGridViewLocation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewLocation.Location = new System.Drawing.Point(26, 332);
+            this.dataGridViewLocation.Name = "dataGridViewLocation";
+            this.dataGridViewLocation.ReadOnly = true;
+            this.dataGridViewLocation.Size = new System.Drawing.Size(838, 150);
+            this.dataGridViewLocation.TabIndex = 67;
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(137, 223);
             this.button2.Name = "button2";
@@ -731,6 +780,7 @@
             // 
             // button3
             // 
+            this.button3.Enabled = false;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Location = new System.Drawing.Point(246, 223);
             this.button3.Name = "button3";
@@ -776,57 +826,10 @@
             this.BtnAjouterLocation.UseVisualStyleBackColor = true;
             this.BtnAjouterLocation.Click += new System.EventHandler(this.BtnAjouterLocation_Click);
             // 
-            // textBox3
+            // clientBindingSource
             // 
-            this.textBox3.Location = new System.Drawing.Point(137, 31);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(179, 20);
-            this.textBox3.TabIndex = 71;
-            this.textBox3.Text = "1";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(349, 16);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(522, 31);
-            this.label10.TabIndex = 72;
-            this.label10.Text = "Filtre du nombre de km que le client a fait :";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(494, 57);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(80, 20);
-            this.textBox4.TabIndex = 73;
-            this.textBox4.Text = "1";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(494, 89);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(80, 20);
-            this.textBox5.TabIndex = 74;
-            this.textBox5.Text = "1";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(374, 60);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(105, 13);
-            this.label13.TabIndex = 75;
-            this.label13.Text = "Kilométrage minimum";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(374, 92);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(108, 13);
-            this.label14.TabIndex = 76;
-            this.label14.Text = "Kilométrage maximum";
+            this.clientBindingSource.DataMember = "client";
+            this.clientBindingSource.DataSource = this.locationVoitureDataSetBindingSource;
             // 
             // locationVoitureDataSetBindingSource
             // 
@@ -838,6 +841,16 @@
             this.locationVoitureDataSet.DataSetName = "LocationVoitureDataSet";
             this.locationVoitureDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // vehiculeBindingSource
+            // 
+            this.vehiculeBindingSource.DataMember = "Vehicule";
+            this.vehiculeBindingSource.DataSource = this.locationVoitureDataSetBindingSource;
+            // 
+            // vehiculeBindingSource1
+            // 
+            this.vehiculeBindingSource1.DataMember = "Vehicule";
+            this.vehiculeBindingSource1.DataSource = this.locationVoitureDataSetBindingSource;
+            // 
             // clientTableAdapter
             // 
             this.clientTableAdapter.ClearBeforeFill = true;
@@ -845,16 +858,6 @@
             // vehiculeTableAdapter
             // 
             this.vehiculeTableAdapter.ClearBeforeFill = true;
-            // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(397, 130);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(164, 29);
-            this.button5.TabIndex = 77;
-            this.button5.Text = "Filtrer";
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // main
             // 
@@ -872,15 +875,15 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicule)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLocation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datasetVehiculeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehiculeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehiculeBindingSource1)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -946,7 +949,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewLocation;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label11;
@@ -954,12 +957,12 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button BtnAjouterLocation;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtKmMax;
+        private System.Windows.Forms.TextBox txtKmMin;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button BtnFiltrer;
     }
 }
 

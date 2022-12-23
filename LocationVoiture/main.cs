@@ -47,6 +47,45 @@ namespace LocationVoiture
         public const string ModeleNoPermis = "^[A-Za-z]{4}[0-9]{7}$";
         public const string ModeleAdresse = "^[0-9a-zA-Z ]+$";
 
+        public void ConnectionLocation(int p_option)
+        {
+            int valeurMin = -1;
+            int valeurMax = -1;
+            if ((p_option == 1 || p_option == 2))
+            {
+                valeurMin = int.Parse(txtKmMin.Text);
+            }
+            if (p_option == 0)
+            {
+                string Query2 = "select * from location;";
+                AdoLocation.Cmd.CommandText = Query2;
+            }
+            else if (p_option == 1)
+            {
+                string Query2 = "select * from location where noKmParcourus >= " + valeurMin + ";";
+                AdoLocation.Cmd.CommandText = Query2;
+            }
+            else if (p_option == 2)
+            {
+                string Query2 = "select * from location where noKmParcourus <= " + valeurMax + ";";
+                AdoLocation.Cmd.CommandText = Query2;
+            }
+            else if (p_option == 3)
+            {
+                string Query2 = "select * from location where noKmParcourus >= " + valeurMin + "and noKmParcourus <= " + valeurMax + ";";
+                AdoLocation.Cmd.CommandText = Query2;
+            }
+            
+            AdoLocation.Cmd.Connection = AdoLocation.Conn;
+            AdoLocation.Adapter.SelectCommand = AdoLocation.Cmd;
+            AdoLocation.Adapter.Fill(Ado.Dslocation);
+
+            AdoLocation.DtLocation = Ado.Dslocation.Tables[0];
+            this.dataGridViewLocation.DataSource = AdoLocation.DtLocation;
+            AdoLocation.Cmd.Connection.Close(); 
+        }
+
+
         /// <summary>
         /// methode pour vérifier les données entrée par l'utilisateur pour la création de client
         /// </summary>
@@ -109,7 +148,7 @@ namespace LocationVoiture
         {
 
             // inspiré du laboratoire ADO.NET : Mode déconnecté ou indirect.
-            string Query = "select * from client;select * from Vehicule;";
+            string Query = "select * from client";
             Ado.Cmd.CommandText = Query;
 
             Ado.Cmd.Connection = Ado.Conn;
@@ -136,6 +175,8 @@ namespace LocationVoiture
             comboAnnee.SelectedItem = comboAnnee.Items[0];
             comboCouleur.SelectedItem = comboCouleur.Items[0];
             comboCategorie.SelectedItem = comboCategorie.Items[0];
+            ConnectionLocation(0);
+
 
         }
         /// <summary>
@@ -508,7 +549,64 @@ namespace LocationVoiture
 
         private void BtnAjouterLocation_Click(object sender, EventArgs e)
         {
-            return;
+
+
+
+
+            DataRow uneLocation = AdoVehicule.DtVehicule.NewRow();
+            uneLocation[0] = txtIDvehicule.Text.Trim();
+            uneLocation[1] = comboMarque.Text.Trim();
+            uneLocation[2] = comboModele.Text.Trim();
+            uneLocation[3] = comboAnnee.Text.Trim();
+            uneLocation[4] = comboCouleur.Text.Trim();
+            uneLocation[5] = int.Parse(txtKilometrage.Text.Trim()); ;
+            uneLocation[6] = comboCategorie.Text.Trim();
+            AdoLocation.DtLocation.Rows.Add(uneLocation);
+        }
+
+        private void BtnFiltrer_Click(object sender, EventArgs e)
+        {
+            if (txtKmMin.Text == "" && txtKmMax.Text == "")
+            {
+                MessageBox.Show(("Veuillez entrer une valeur dans un des champs"), "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (txtKmMin.Text != "" && txtKmMax.Text == "")
+            {
+                if (txtKmMin.Text.Trim().All(Char.IsDigit))
+                {
+                    ConnectionLocation(1);
+
+                }
+                else
+                {
+                    MessageBox.Show(("Veuillez entrer une valeur composé de chiffre"), "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (txtKmMax.Text != "" && txtKmMin.Text == "")
+            {
+                if (txtKmMin.Text.Trim().All(Char.IsDigit))
+                {
+                    ConnectionLocation(2);
+
+                }
+                else
+                {
+                    MessageBox.Show(("Veuillez entrer une valeur composé de chiffre"), "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (txtKmMax.Text != "" && txtKmMin.Text != "")
+            {
+                if (txtKmMin.Text.Trim().All(Char.IsDigit) && txtKmMax.Text.Trim().All(Char.IsDigit))
+                {
+                    ConnectionLocation(3);
+
+                }
+                else
+                {
+                    MessageBox.Show(("Veuillez entrer une valeur composé de chiffre"), "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
         }
     }
 }

@@ -34,10 +34,10 @@ namespace LocationVehicule
             connectionstr = "Data Source=jihedordi;Initial Catalog=LocationVoiture;Integrated Security=True";
             Conn = new SqlConnection(connectionstr);
             Cmd = new SqlCommand();
-            adapter = new SqlDataAdapter();
-            dsLocation = new DataSet();
-            dtLocation = new DataTable();
-            dtClient = new DataTable();
+            Adapter = new SqlDataAdapter();
+            Dslocation = new DataSet();
+            DtLocation = new DataTable();
+            DtClient = new DataTable();
             DtVehicule = new DataTable();
 
         }
