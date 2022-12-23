@@ -168,14 +168,14 @@ namespace LocationVoiture
 
             AdoVehicule.DtVehicule = AdoVehicule.Dslocation.Tables[0];
             this.dataGridViewVehicule.DataSource = AdoVehicule.DtVehicule;
-
+            ConnectionLocation(0);
             // selectionner les premiers elements des combobox de la partie voiture
             comboMarque.SelectedItem = comboMarque.Items[0];
             comboModele.SelectedItem = comboModele.Items[0];
             comboAnnee.SelectedItem = comboAnnee.Items[0];
             comboCouleur.SelectedItem = comboCouleur.Items[0];
             comboCategorie.SelectedItem = comboCategorie.Items[0];
-            ConnectionLocation(0);
+            
 
 
         }

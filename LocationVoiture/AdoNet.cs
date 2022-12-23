@@ -17,15 +17,17 @@ namespace LocationVehicule
         private DataTable dtVehicule;
         private DataTable dtLocation;
         private DataSet dsLocation;
-
+        private DataSet dsLocation1;
 
         public SqlConnection Conn { get => conn; set => conn = value; }
         public SqlCommand Cmd { get => cmd; set => cmd = value; }
         public SqlDataReader Reader { get => reader; set => reader = value; }
         public SqlDataAdapter Adapter { get => adapter; set => adapter = value; }
         public string ConnectionStr { get => connectionstr; }
-        public DataTable DtClient { get => dtClient; set => dtClient = value; }
         public DataSet Dslocation { get => dsLocation; set => dsLocation = value; }
+
+        public DataSet Dslocation1 { get => dsLocation1; set => dsLocation1 = value; }
+        public DataTable DtClient { get => dtClient; set => dtClient = value; }
         public DataTable DtVehicule { get => dtVehicule; set => dtVehicule = value; }
         public DataTable DtLocation { get => dtLocation; set => dtLocation = value; }
 
@@ -36,6 +38,7 @@ namespace LocationVehicule
             Cmd = new SqlCommand();
             Adapter = new SqlDataAdapter();
             Dslocation = new DataSet();
+            Dslocation1 = new DataSet();
             DtLocation = new DataTable();
             DtClient = new DataTable();
             DtVehicule = new DataTable();
