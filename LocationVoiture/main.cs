@@ -33,7 +33,7 @@ namespace LocationVoiture
         // initialisation des objets AdoNet
         AdoNet Ado = new AdoNet();
         AdoNet AdoVehicule = new AdoNet();
-        AdoNet AdoLocation1 = new AdoNet();
+
         public string MessageErreur;
         // regex pour le nom, prenom , no téléphone, curriel, no permis et adresse du client
         public const string ModeleNom = "^[a-zA-Z]+$";
@@ -49,11 +49,16 @@ namespace LocationVoiture
 
         public void ConnectionLocation(int p_option)
         {
+            AdoNet AdoLocation1 = new AdoNet();
             int valeurMin = -1;
             int valeurMax = -1;
-            if ((p_option == 1 || p_option == 2))
+            if (p_option == 1)
             {
                 valeurMin = int.Parse(txtKmMin.Text);
+            }
+            if (p_option == 2)
+            {
+                valeurMax = int.Parse(txtKmMax.Text);
             }
             if (p_option == 0)
             {
@@ -75,14 +80,25 @@ namespace LocationVoiture
                 string Query2 = "select * from location where noKmParcourus >= " + valeurMin + "and noKmParcourus <= " + valeurMax + ";";
                 AdoLocation1.Cmd.CommandText = Query2;
             }
-            
+
+            // problème ici
             AdoLocation1.Cmd.Connection = AdoLocation1.Conn;
             AdoLocation1.Adapter.SelectCommand = AdoLocation1.Cmd;
             AdoLocation1.Adapter.Fill(Ado.Dslocation1);
 
             AdoLocation1.DtLocation = Ado.Dslocation1.Tables[0];
             this.dataGridViewLocation.DataSource = AdoLocation1.DtLocation;
-            AdoLocation1.Cmd.Connection.Close(); 
+            if (p_option == 5)
+            {
+                DataRow uneLocation = AdoLocation1.DtLocation.NewRow();
+                uneLocation[0] = txtIDLocation.Text.Trim();
+                uneLocation[1] = txtIDVehiculeLocation.Text.Trim();
+                uneLocation[2] = txtNoConducteur.Text.Trim();
+                uneLocation[3] = txtKmLocation.Text.Trim();
+
+                AdoLocation1.DtLocation.Rows.Add(uneLocation);
+            }
+            AdoLocation1.Conn.Close();
         }
 
 
@@ -551,18 +567,11 @@ namespace LocationVoiture
         {
 
 
-            // il faudrait organiser une reqète qui valide que les autres tables ont la valeur de la clé primaire trouvé
-            /*
-            DataRow uneLocation = AdoVehicule.DtVehicule.NewRow();
-            uneLocation[0] = txtIDvehicule.Text.Trim();
-            uneLocation[1] = comboMarque.Text.Trim();
-            uneLocation[2] = comboModele.Text.Trim();
-            uneLocation[3] = comboAnnee.Text.Trim();
-            uneLocation[4] = comboCouleur.Text.Trim();
-            uneLocation[5] = int.Parse(txtKilometrage.Text.Trim()); ;
-            uneLocation[6] = comboCategorie.Text.Trim();
-            AdoLocation1.DtLocation.Rows.Add(uneLocation);
-            */
+            // il faudrait organiser une requète qui valide que les autres tables ont la valeur de la clé primaire et ensuite ajouter le membre 
+            // et vérifier les valeurs entrée
+            ConnectionLocation(5);
+
+
         }
 
         private void BtnFiltrer_Click(object sender, EventArgs e)
