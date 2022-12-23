@@ -16,11 +16,14 @@ namespace LocationVehicule
         protected int NbrKmParcourus;
         protected bool Assurance;
 
-        public Details_Location()
+        public Details_Location(Client p_client, Vehicule p_vehicule)
         {
+
             this.NbrJoursLocation = -1;
             this.NbrKmParcourus = -1;
             this.Assurance = false;
+            this.Vehicule = p_vehicule;
+            this.Client = p_client;
 
         }
         public Details_Location(int pNbrKmParcourus)

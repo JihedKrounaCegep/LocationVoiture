@@ -77,12 +77,8 @@
             this.lblVehicule = new System.Windows.Forms.Label();
             this.BtnAjouterVehicule = new System.Windows.Forms.Button();
             this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.locationVoitureDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.locationVoitureDataSet = new LocationVoiture.LocationVoitureDataSet();
             this.datasetVehiculeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.clientTableAdapter = new LocationVoiture.LocationVoitureDataSetTableAdapters.clientTableAdapter();
             this.vehiculeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.vehiculeTableAdapter = new LocationVoiture.LocationVoitureDataSetTableAdapters.VehiculeTableAdapter();
             this.vehiculeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
@@ -101,19 +97,24 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.locationVoitureDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.locationVoitureDataSet = new LocationVoiture.LocationVoitureDataSet();
+            this.clientTableAdapter = new LocationVoiture.LocationVoitureDataSetTableAdapters.clientTableAdapter();
+            this.vehiculeTableAdapter = new LocationVoiture.LocationVoitureDataSetTableAdapters.VehiculeTableAdapter();
+            this.button5 = new System.Windows.Forms.Button();
             this.LocationTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClient)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicule)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datasetVehiculeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehiculeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehiculeBindingSource1)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // LocationTab
@@ -643,28 +644,10 @@
             this.clientBindingSource.DataMember = "client";
             this.clientBindingSource.DataSource = this.locationVoitureDataSetBindingSource;
             // 
-            // locationVoitureDataSetBindingSource
-            // 
-            this.locationVoitureDataSetBindingSource.DataSource = this.locationVoitureDataSet;
-            this.locationVoitureDataSetBindingSource.Position = 0;
-            // 
-            // locationVoitureDataSet
-            // 
-            this.locationVoitureDataSet.DataSetName = "LocationVoitureDataSet";
-            this.locationVoitureDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // clientTableAdapter
-            // 
-            this.clientTableAdapter.ClearBeforeFill = true;
-            // 
             // vehiculeBindingSource
             // 
             this.vehiculeBindingSource.DataMember = "Vehicule";
             this.vehiculeBindingSource.DataSource = this.locationVoitureDataSetBindingSource;
-            // 
-            // vehiculeTableAdapter
-            // 
-            this.vehiculeTableAdapter.ClearBeforeFill = true;
             // 
             // vehiculeBindingSource1
             // 
@@ -673,6 +656,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button5);
             this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.label13);
             this.tabPage3.Controls.Add(this.textBox5);
@@ -803,11 +787,11 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(444, 16);
+            this.label10.Location = new System.Drawing.Point(349, 16);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(90, 31);
+            this.label10.Size = new System.Drawing.Size(522, 31);
             this.label10.TabIndex = 72;
-            this.label10.Text = "Filtre :";
+            this.label10.Text = "Filtre du nombre de km que le client a fait :";
             // 
             // textBox4
             // 
@@ -843,6 +827,34 @@
             this.label14.TabIndex = 76;
             this.label14.Text = "Kilométrage maximum";
             // 
+            // locationVoitureDataSetBindingSource
+            // 
+            this.locationVoitureDataSetBindingSource.DataSource = this.locationVoitureDataSet;
+            this.locationVoitureDataSetBindingSource.Position = 0;
+            // 
+            // locationVoitureDataSet
+            // 
+            this.locationVoitureDataSet.DataSetName = "LocationVoitureDataSet";
+            this.locationVoitureDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // clientTableAdapter
+            // 
+            this.clientTableAdapter.ClearBeforeFill = true;
+            // 
+            // vehiculeTableAdapter
+            // 
+            this.vehiculeTableAdapter.ClearBeforeFill = true;
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Location = new System.Drawing.Point(397, 130);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(164, 29);
+            this.button5.TabIndex = 77;
+            this.button5.Text = "Filtrer";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -860,14 +872,14 @@
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVehicule)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datasetVehiculeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehiculeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehiculeBindingSource1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationVoitureDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -946,6 +958,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button button5;
     }
 }
 
